@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block titulo %}Inicio{% endblock %}
+{% block content %}
+    <h1>DASHBOARD SEELIN</h1>
+
+    <h1>Subir Archivo Excel</h1>
+    <form action="{{ url_for('guardar_datos') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <input type="submit" value="Subir">
+    </form>
+    {% if mensaje%}
+        <p>{{ mensaje }}</p>
+    {% else %}
+    <p></p>
+    {% endif %}
+{% endblock %}

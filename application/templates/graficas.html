@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+{% block titulo %}Graficas{% endblock %}
+{% block content %}
+<div class="row" style="display:flex; justify-content: space-around;">
+  <div class="chart-container" style="position: relative; height:60vh; width:30vw">
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <div class="chart-container" style="position: relative; height:60vh; width:30vw">
+    <canvas id="myChart2"></canvas>
+  </div>
+</div>
+
+
+<input type="hidden" name="d_lp" id="d_lp" value="{{ docentes_la_paz[0] }}">
+<input type="hidden" name="d_ea" id="d_ea" value="{{ docentes_el_alto[0] }}">
+<input type="hidden" name="nro_dm" id="nro_dm" value="{{ doc_mas }}">
+<input type="hidden" name="nro_em" id="nro_em" value="{{ est_mas }}">
+<input type="hidden" name="nro_df" id="nro_df" value="{{ doc_fem }}">
+<input type="hidden" name="nro_ef" id="nro_ef" value="{{ est_fem }}">
+
+<script>
+  const ctx = document.getElementById('myChart');
+  var d_lp = document.getElementById('d_lp').value;
+  var d_ea = document.getElementById('d_ea').value;
+  var nro_dm = document.getElementById('nro_dm').value;
+  var nro_em = document.getElementById('nro_em').value;
+  var nro_df = document.getElementById('nro_df').value;
+  var nro_ef = document.getElementById('nro_ef').value;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['La Paz', 'El Alto'],
+      datasets: [{
+        label: '# Residencia Docentes',
+        data: [d_lp, d_ea],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+  
+  const  ctx2 = document.getElementById('myChart2');
+  const data = {
+  labels: [
+    'Docentes Masculinos',
+    'Estudiantes Masculinos',
+    'Docentes Femeninos',
+    'Estudiantes Femeninos'
+  ],
+  datasets: [{
+      label: 'Numero',
+      data: [nro_dm, nro_em, nro_df, nro_ef],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(255, 255, 86)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+  new Chart(ctx2,{
+    type: 'pie',
+    data: data,
+  });
+
+</script>
+{% endblock %}
